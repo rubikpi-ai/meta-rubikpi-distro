@@ -22,11 +22,11 @@ RDEPENDS:${PN} = "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'virtualization', 'packagegroup-qcom-k8s', '', d)} \
     packagegroup-qcom-opencv \
     packagegroup-qcom-camera \
+    packagegroup-qcom-display \
     "
 
 RDEPENDS:${PN}:append:qcom-custom-distro = "\
     packagegroup-qcom-audio \
-    packagegroup-qcom-display \
     packagegroup-qcom-fastcv \
     packagegroup-qcom-graphics \
     packagegroup-qcom-iot-base-utils \
