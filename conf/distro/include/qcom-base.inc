@@ -67,7 +67,7 @@ INHERIT += "uninative"
 GCCVERSION = "13.3%"
 
 # Easily switch between rust versions just by changing RUST_VERSION variable
-RUST_VERSION ?= "1.73.0"
+RUST_VERSION ?= "1.75.0"
 
 PREFERRED_VERSION_cargo ?= "${RUST_VERSION}"
 PREFERRED_VERSION_cargo-native ?= "${RUST_VERSION}"
