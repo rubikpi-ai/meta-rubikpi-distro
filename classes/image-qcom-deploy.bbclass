@@ -13,9 +13,6 @@ RM_WORK_EXCLUDE += "${PN}"
 IMAGE_GEN_DEBUGFS = "1"
 IMAGE_FSTYPES_DEBUGFS = "tar.bz2"
 
-# Don't append timestamp to image name
-IMAGE_VERSION_SUFFIX = ""
-
 # Don't install locales into rootfs
 IMAGE_LINGUAS = ""
 
@@ -75,18 +72,18 @@ do_deploy_fixup () {
     fi
 
     # copy efi.bin
-    if [ -f ${DEPLOY_DIR_IMAGE}/esp-qcom-image-${MACHINE}.vfat ]; then
-        install -m 0644 ${DEPLOY_DIR_IMAGE}/esp-qcom-image-${MACHINE}.vfat efi.bin
+    if [ -f ${DEPLOY_DIR_IMAGE}/esp-qcom-image-${MACHINE}${IMAGE_NAME_SUFFIX}.vfat ]; then
+        install -m 0644 ${DEPLOY_DIR_IMAGE}/esp-qcom-image-${MACHINE}${IMAGE_NAME_SUFFIX}.vfat efi.bin
     fi
 
     # copy dtb.bin
-    if [ -f ${DEPLOY_DIR_IMAGE}/dtb-qcom-image-${MACHINE}.vfat ]; then
-        install -m 0644 ${DEPLOY_DIR_IMAGE}/dtb-qcom-image-${MACHINE}.vfat dtb.bin
+    if [ -f ${DEPLOY_DIR_IMAGE}/dtb-qcom-image-${MACHINE}${IMAGE_NAME_SUFFIX}.vfat ]; then
+        install -m 0644 ${DEPLOY_DIR_IMAGE}/dtb-qcom-image-${MACHINE}${IMAGE_NAME_SUFFIX}.vfat dtb.bin
     fi
 
     # copy system.img
-    if [ -f ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.${SYSTEMIMAGE_TYPE} ]; then
-        install -m 0644 ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.${SYSTEMIMAGE_TYPE} ${SYSTEMIMAGE_TARGET}
+    if [ -f ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.${SYSTEMIMAGE_TYPE} ]; then
+        install -m 0644 ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.${SYSTEMIMAGE_TYPE} ${SYSTEMIMAGE_TARGET}
     fi
 
     #Copy gpt_main.bin
