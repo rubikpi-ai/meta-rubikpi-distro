@@ -29,10 +29,7 @@ IMAGE_INSTALL:remove = "${@oe.utils.ifelse('${SOTA_CLIENT}' != 'aktualizr', 'akt
 #Increase image size as a percentage overage to accomodate atleast two OSTree deployments
 IMAGE_OVERHEAD_FACTOR = "2.0"
 
-EXTRA_USERS_PARAMS = "\
-    useradd -r -s /bin/false system; \
-    usermod -p '\$6\$UDMimfYF\$akpHo9mLD4z0vQyKzYxYbsdYxnpUD7B7rHskq1E3zXK8ygxzq719wMxI78i0TIIE0NB1jUToeeFzWXVpBBjR8.' root; \
-    "
+EXTRA_USERS_PARAMS = "usermod -p '\$6\$UDMimfYF\$akpHo9mLD4z0vQyKzYxYbsdYxnpUD7B7rHskq1E3zXK8ygxzq719wMxI78i0TIIE0NB1jUToeeFzWXVpBBjR8.' root;"
 
 # Adding kernel-devsrc to provide kernel development support on SDK
 TOOLCHAIN_TARGET_TASK += "kernel-devsrc"
