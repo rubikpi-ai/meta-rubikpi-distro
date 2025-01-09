@@ -148,6 +148,16 @@ do_deploy_fixup () {
         install -m 0644 ${DEPLOY_DIR_IMAGE}/zeros_33sectors.bin zeros_33sectors.bin
     fi
 
+    # copy fitimage
+    if [ -f ${DEPLOY_DIR_IMAGE}/fitImage-${INITRAMFS_IMAGE}-${MACHINE}-${MACHINE} ]; then
+        install -m 0644 ${DEPLOY_DIR_IMAGE}/fitImage-${INITRAMFS_IMAGE}-${MACHINE}-${MACHINE} boot.img
+    fi
+
+    # copy u-boot.elf
+    if [ -f ${DEPLOY_DIR_IMAGE}/u-boot.elf ]; then
+        install -m 0644 ${DEPLOY_DIR_IMAGE}/u-boot.elf u-boot.elf
+    fi
+
     for patchfile in ${DEPLOY_DIR_IMAGE}/patch*.xml; do
         if [ -f "$patchfile" ]; then
             install -m 0644 $patchfile .
