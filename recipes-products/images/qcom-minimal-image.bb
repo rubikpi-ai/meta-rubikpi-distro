@@ -10,6 +10,9 @@ inherit ${@bb.utils.contains('DISTRO_FEATURES', 'sota', 'sota image_types_ostree
 # selinux-image is inherited to utilize the selinux_set_labels API, to perform build-time context labeling.
 inherit  ${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'selinux-image', '', d)}
 
+# This will set selinux label to ${OTA_SYSROOT}/ostree/.. to perform build-time context labeling.
+inherit ${@bb.utils.contains('DISTRO_FEATURES', 'sota selinux', 'image-qcom-ostree-selinux', '', d)}
+
 # let's make sure we have a good image..
 REQUIRED_DISTRO_FEATURES = "pam systemd"
 
