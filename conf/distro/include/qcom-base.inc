@@ -52,7 +52,7 @@ VOLATILE_LOG_DIR = "${@bb.utils.contains('PERFORMANCE_BUILD', '1', 'yes', 'no', 
 # Drop console from Kernel cmdline.
 CONSOLE_CMDLINE = "${@oe.utils.conditional('PERFORMANCE_BUILD','1','console=','console=ttyMSM0,115200n8 earlycon',d)}"
 # Disable serial console
-SERIAL_CONSOLES = "${@oe.utils.conditional('PERFORMANCE_BUILD','1','','115200;ttyMSM0',d)}"
+SERIAL_CONSOLES ?= "${@oe.utils.conditional('PERFORMANCE_BUILD','1','','115200;ttyMSM0',d)}"
 
 BUILDHISTORY_COMMIT = "1"
 
