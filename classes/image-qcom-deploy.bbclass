@@ -149,9 +149,9 @@ do_deploy_fixup () {
     fi
 
     # copy fitimage
-    if [ -f ${DEPLOY_DIR_IMAGE}/fitImage-${INITRAMFS_IMAGE}-${MACHINE}-${MACHINE} ]; then
-        install -m 0644 ${DEPLOY_DIR_IMAGE}/fitImage-${INITRAMFS_IMAGE}-${MACHINE}-${MACHINE} boot.img
-    fi
+    if [ -f ${DEPLOY_DIR_IMAGE}/fitImage-combineddtb ]; then
+        install -m 0644 ${DEPLOY_DIR_IMAGE}/fitImage-combineddtb boot.img
+    fi 
 
     # copy u-boot.elf
     if [ -f ${DEPLOY_DIR_IMAGE}/u-boot.elf ]; then
