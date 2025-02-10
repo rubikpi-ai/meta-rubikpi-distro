@@ -18,8 +18,8 @@ RDEPENDS:${PN} = "\
     gstreamer1.0-plugins-bad \
     gstreamer1.0-rtsp-server \
     tensorflow-lite \
-    packagegroup-qcom-containers \
-    packagegroup-qcom-k8s \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'virtualization', 'packagegroup-qcom-containers', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'virtualization', 'packagegroup-qcom-k8s', '', d)} \
     packagegroup-qcom-opencv \
     packagegroup-qcom-camera \
     "
