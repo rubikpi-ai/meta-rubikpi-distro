@@ -82,8 +82,8 @@ do_deploy_fixup () {
     fi
 
     # copy system.img
-    if [ -f ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.${SYSTEMIMAGE_TYPE} ]; then
-        install -m 0644 ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.${SYSTEMIMAGE_TYPE} ${SYSTEMIMAGE_TARGET}
+    if [ -f ${DEPLOY_DIR_IMAGE}/${IMAGE_LINK_NAME}.${SYSTEMIMAGE_TYPE} ]; then
+        install -m 0644 ${DEPLOY_DIR_IMAGE}/${IMAGE_LINK_NAME}.${SYSTEMIMAGE_TYPE} ${SYSTEMIMAGE_TARGET}
     fi
 
     #Copy gpt_main.bin
