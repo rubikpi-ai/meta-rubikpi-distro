@@ -19,7 +19,7 @@ RDEPENDS:${PN} = "\
     packagegroup-filesystem-utils \
     packagegroup-qcom-initscripts \
     packagegroup-support-utils \
-    packagegroup-qcom-vm-host \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'virtualization', 'packagegroup-qcom-vm-host', '', d)} \
     packagegroup-qcom-wifi \
     "
 
@@ -39,7 +39,7 @@ RDEPENDS:packagegroup-support-utils = "\
     ethtool \
     efivar \
     iproute2 \
-    irqbalance \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'virtualization', 'irqbalance', '', d)} \
     libatomic \
     libinput \
     libinput-bin \
