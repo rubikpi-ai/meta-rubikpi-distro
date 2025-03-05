@@ -18,16 +18,15 @@ RDEPENDS:${PN} = "\
     gstreamer1.0-plugins-bad \
     gstreamer1.0-rtsp-server \
     tensorflow-lite \
-    packagegroup-container \
-    packagegroup-qcom-k8s \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'virtualization', 'packagegroup-qcom-containers', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'virtualization', 'packagegroup-qcom-k8s', '', d)} \
     packagegroup-qcom-opencv \
     packagegroup-qcom-camera \
-    python3-docker-compose \
+    packagegroup-qcom-display \
     "
 
 RDEPENDS:${PN}:append:qcom-custom-distro = "\
     packagegroup-qcom-audio \
-    packagegroup-qcom-display \
     packagegroup-qcom-fastcv \
     packagegroup-qcom-graphics \
     packagegroup-qcom-iot-base-utils \

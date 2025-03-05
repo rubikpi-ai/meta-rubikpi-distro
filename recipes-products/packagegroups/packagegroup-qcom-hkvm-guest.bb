@@ -22,4 +22,8 @@ RDEPENDS:${PN} = "\
 
 RDEPENDS:packagegroup-hkvm-utils = "\
     mosquitto \
-"
+    python3-pip \
+    python3-pandas \
+    python3-requests \
+    stress-ng \
+    "
