@@ -23,10 +23,10 @@ RDEPENDS:${PN} = "\
     packagegroup-qcom-opencv \
     packagegroup-qcom-camera \
     packagegroup-qcom-display \
+    packagegroup-qcom-audio \
     "
 
 RDEPENDS:${PN}:append:qcom-custom-distro = "\
-    packagegroup-qcom-audio \
     packagegroup-qcom-fastcv \
     packagegroup-qcom-graphics \
     packagegroup-qcom-iot-base-utils \
