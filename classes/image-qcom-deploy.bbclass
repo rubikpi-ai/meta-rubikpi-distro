@@ -163,5 +163,13 @@ do_deploy_fixup () {
             install -m 0644 $patchfile .
         fi
     done
+
+    # Copy sail boot bins
+    if [ -d ${DEPLOY_DIR_IMAGE}/sail_nor ]; then
+        install -d sail_nor
+        for f in ${DEPLOY_DIR_IMAGE}/sail_nor/*; do
+            install -m 0644 $f ./sail_nor/
+	done
+    fi
 }
 addtask do_deploy_fixup after do_image_complete before do_build
