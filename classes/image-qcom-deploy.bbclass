@@ -36,6 +36,7 @@ do_deploy_fixup[dirs] = "${DEPLOY_DIR_IMAGE}/${IMAGE_BASENAME}"
 do_deploy_fixup[cleandirs] = "${DEPLOY_DIR_IMAGE}/${IMAGE_BASENAME}"
 do_deploy_fixup[depends] += "esp-qcom-image:do_image_complete"
 do_deploy_fixup[depends] += "dtb-qcom-image:do_image_complete"
+do_deploy_fixup[depends] += "dtb-el2-qcom-image:do_image_complete"
 do_deploy_fixup[deptask] = "do_image_complete"
 
 DEPLOYDEPENDS = " \
@@ -79,6 +80,11 @@ do_deploy_fixup () {
     # copy dtb.bin
     if [ -f ${DEPLOY_DIR_IMAGE}/dtb-qcom-image-${MACHINE}${IMAGE_NAME_SUFFIX}.vfat ]; then
         install -m 0644 ${DEPLOY_DIR_IMAGE}/dtb-qcom-image-${MACHINE}${IMAGE_NAME_SUFFIX}.vfat dtb.bin
+    fi
+
+    # copy el2-dtb.bin
+    if [ -f ${DEPLOY_DIR_IMAGE}/dtb-el2-qcom-image-${MACHINE}${IMAGE_NAME_SUFFIX}.vfat ]; then
+        install -m 0644 ${DEPLOY_DIR_IMAGE}/dtb-el2-qcom-image-${MACHINE}${IMAGE_NAME_SUFFIX}.vfat el2-dtb.bin
     fi
 
     # copy system.img
@@ -149,9 +155,9 @@ do_deploy_fixup () {
     fi
 
     # copy fitimage
-    if [ -f ${DEPLOY_DIR_IMAGE}/fitImage-${INITRAMFS_IMAGE}-${MACHINE}-${MACHINE} ]; then
-        install -m 0644 ${DEPLOY_DIR_IMAGE}/fitImage-${INITRAMFS_IMAGE}-${MACHINE}-${MACHINE} boot.img
-    fi
+    if [ -f ${DEPLOY_DIR_IMAGE}/fitImage-combineddtb ]; then
+        install -m 0644 ${DEPLOY_DIR_IMAGE}/fitImage-combineddtb boot.img
+    fi 
 
     # copy u-boot.elf
     if [ -f ${DEPLOY_DIR_IMAGE}/u-boot.elf ]; then
@@ -163,5 +169,13 @@ do_deploy_fixup () {
             install -m 0644 $patchfile .
         fi
     done
+
+    # Copy sail boot bins
+    if [ -d ${DEPLOY_DIR_IMAGE}/sail_nor ]; then
+        install -d sail_nor
+        for f in ${DEPLOY_DIR_IMAGE}/sail_nor/*; do
+            install -m 0644 $f ./sail_nor/
+	done
+    fi
 }
 addtask do_deploy_fixup after do_image_complete before do_build
