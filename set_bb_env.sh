@@ -174,9 +174,7 @@ if [ -z "$BUILDTYPE" ]; then
     BUILDTYPE="default"
 fi
 
-if [ -z "${SDKMACHINE}" ]; then
-    SDKMACHINE='x86_64'
-fi
+SDKMACHINE=$(uname -m)
 
 BUILDDIR="${WS}/build-$DISTRO"
 
