@@ -89,8 +89,8 @@ fi
 read uitool <<< "$(which whiptail dialog 2> /dev/null)"
 
 # create a common list of "<machine>(<layer>)", sorted by <machine>
-# Restrict to meta-qcom-hwe machines
-MACHLAYERS=$(find layers -print | grep "meta-qcom-hwe/conf/machine/.*\.conf" | sed -e 's/\.conf//g' -e 's/layers\///' | awk -F'/conf/machine/' '{print $NF "(" $1 ")"}' | LANG=C sort)
+# Restrict to meta-qcom machines
+MACHLAYERS=$(find layers -print | grep "meta-rubikpi-bsp/conf/machine/.*\.conf" | sed -e 's/\.conf//g' -e 's/layers\///' | awk -F'/conf/machine/' '{print $NF "(" $1 ")"}' | LANG=C sort)
 
 if [ -n "${MACHLAYERS}" ] && [ -z "${MACHINE}" ]; then
     for ITEM in $MACHLAYERS; do
@@ -127,7 +127,7 @@ fi
 
 # create a common list of "<distro>(<layer>)", sorted by <distro>
 # Restrict to meta-qti-distro distros
-DISTROLAYERS=$(find layers -print | grep "meta-qcom-distro/conf/distro/.*\.conf" | sed -e 's/\.conf//g' -e 's/layers\///' | awk -F'/conf/distro/' '{print $NF "(" $1 ")"}' | LANG=C sort)
+DISTROLAYERS=$(find layers -print | grep "meta-rubikpi-distro/conf/distro/.*\.conf" | sed -e 's/\.conf//g' -e 's/layers\///' | awk -F'/conf/distro/' '{print $NF "(" $1 ")"}' | LANG=C sort)
 
 if [ -n "${DISTROLAYERS}" ] && [ -z "${DISTRO}" ]; then
     for ITEM in $DISTROLAYERS; do
@@ -174,7 +174,9 @@ if [ -z "$BUILDTYPE" ]; then
     BUILDTYPE="default"
 fi
 
-SDKMACHINE=$(uname -m)
+if [ -z "${SDKMACHINE}" ]; then
+    SDKMACHINE='x86_64'
+fi
 
 BUILDDIR="${WS}/build-$DISTRO"
 
@@ -190,8 +192,8 @@ cat >| ${BUILDDIR}/conf/bblayers.conf <<EOF
 # set_bb_env.sh is sourced to set up a workspace.  DO NOT EDIT.
 #--------------------------------------------------------------
 EOF
-if [ -e ${WS}/layers/meta-qcom-distro/conf/bblayers.conf ]; then
-    cat ${WS}/layers/meta-qcom-distro/conf/bblayers.conf >> ${BUILDDIR}/conf/bblayers.conf
+if [ -e ${WS}/layers/meta-rubikpi-distro/conf/bblayers.conf ]; then
+    cat ${WS}/layers/meta-rubikpi-distro/conf/bblayers.conf >> ${BUILDDIR}/conf/bblayers.conf
 fi
 
 # If EXTRALAYERS are avilable update them
@@ -209,8 +211,8 @@ cat >| ${BUILDDIR}/conf/local.conf <<EOF
 # set_bb_env.sh is sourced to set up a workspace.  DO NOT EDIT.
 #--------------------------------------------------------------
 EOF
-if [ -e $WS/layers/meta-qcom-distro/conf/local.conf ]; then
-    cat $WS/layers/meta-qcom-distro/conf/local.conf >> ${BUILDDIR}/conf/local.conf
+if [ -e $WS/layers/meta-rubikpi-distro/conf/local.conf ]; then
+    cat $WS/layers/meta-rubikpi-distro/conf/local.conf >> ${BUILDDIR}/conf/local.conf
 fi
 # If CUST_ID is avilable update
 if [ -n "$CUST_ID" ]; then
