@@ -85,6 +85,12 @@ do_deploy_fixup:append() {
     if [ -f ${DEPLOY_DIR_IMAGE}/RubikPi3_CDT.bin ]; then
         install -m 0644 ${DEPLOY_DIR_IMAGE}/RubikPi3_CDT.bin RubikPi3_CDT.bin
     fi
+
+    # copy usb_fw.img
+    if [ -f ${DEPLOY_DIR_IMAGE}/usb_fw.img ]; then
+        install -m 0644 ${DEPLOY_DIR_IMAGE}/usb_fw.img usb_fw.img
+    fi
+
     # copy initramfs-ostree-image-qcm6490-idp.cpio.gz
     if [ -f ${DEPLOY_DIR_IMAGE}/initramfs-ostree-image-qcm6490-idp.cpio.gz ]; then
         install -m 0644 ${DEPLOY_DIR_IMAGE}/initramfs-ostree-image-qcm6490-idp.cpio.gz initramfs-ostree-image-qcm6490-idp.cpio.gz
